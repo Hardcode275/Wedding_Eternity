@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternity: Descarga la App Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #64B5F6;
+            --accent-color: #FF7043;
+        }
+        .font-elegant {
+            font-family: 'Playfair Display', serif;
+        }
+        #petal-container {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .petal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50% 10%;
+            transform: rotate(45deg);
+            opacity: 0;
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .collapsible-header {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .collapsible-header:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+        .collapsible-content.expanded {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        @keyframes sway {
+            0% { margin-left: -10px; }
+            100% { margin-left: 10px; }
+        }
+    </style>
+</head>
+<body class="bg-[color:var(--primary-color)] font-sans text-white min-h-screen relative overflow-hidden">
+
+    <!-- 🌹 Contenedor de pétalos -->
+    <div id="petal-container"></div>
+
+    <!-- 🌸 Contenido principal -->
+    <div class="relative z-10 flex flex-col items-center justify-center min-h-screen p-6">
+        <div class="max-w-md w-full text-center p-8 sm:p-10 rounded-xl bg-white/50 backdrop-blur-sm shadow-xl">
+            <div class="bg-white p-4 inline-block rounded-2xl shadow-lg mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-[color:var(--primary-color)]" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+            </div>
+
+            <h1 class="font-elegant text-4xl sm:text-5xl font-bold mb-1 leading-tight">Eternity</h1>
+            <p class="text-2xl font-semibold mb-4">Boda Allison y Kevin</p>
+            <p class="text-lg font-light mb-8 opacity-90">
+                Instala la aplicación oficial para ver la cuenta regresiva, mapas y detalles del evento.
+            </p>
+
+            <!-- 🔽 Descarga local del APK -->
+            <a id="downloadButton" href="apk/Eternity.apk" download class="cta-button inline-flex items-center justify-center bg-white text-[color:var(--primary-color)] font-semibold py-4 px-10 rounded-full text-lg sm:text-xl hover:bg-gray-100 transition duration-300 ease-in-out w-full sm:w-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Descargar APK
+            </a>
+
+            <!-- Guía de instalación -->
+            <div class="mt-8 bg-gray-100/70 p-3 rounded-lg text-left shadow-inner">
+                <div class="collapsible-header flex justify-between items-center py-1 px-2 text-gray-800" onclick="toggleCollapsible('installGuide')">
+                    <h3 class="text-base font-semibold">Guía Rápida de Instalación (Abrir)</h3>
+                    <svg id="arrowIcon" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="installGuide" class="collapsible-content px-2 pb-2">
+                    <ol class="list-decimal list-inside text-sm text-gray-800 mt-3 space-y-2">
+                        <li><b>Descarga:</b> Toca el botón de arriba.</li>
+                        <li><b>Permisos:</b> Activa “Permitir instalación desde esta fuente” si lo solicita.</li>
+                        <li><b>Instalar:</b> Abre <code>Eternity.apk</code> y presiona <b>Instalar de todos modos</b>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <p class="mt-4 text-xs opacity-80 italic">
+                El archivo APK es seguro. La alerta es estándar fuera de la Play Store.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 🌸 Animación pétalos
+        const PETAL_COUNT = 30;
+        const container = document.getElementById('petal-container');
+        const colors = ['rgba(255,255,255,0.8)', 'rgba(255,200,200,0.9)', 'rgba(255,255,255,0.6)'];
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = `${Math.random() * 100}vw`;
+            petal.style.top = `-${Math.random() * 200}px`;
+            petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            const size = 15 + Math.random() * 15;
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size * 0.7}px`;
+            const duration = 8 + Math.random() * 8;
+            const delay = Math.random() * 10;
+            petal.style.animation = 
+                `fall ${duration}s linear infinite, 
+                 sway ${5 + Math.random() * 5}s ease-in-out alternate infinite ${delay}s`;
+            petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+            container.appendChild(petal);
+            petal.addEventListener('animationiteration', () => {
+                petal.remove();
+                createPetal();
+            });
+        }
+        for (let i = 0; i < PETAL_COUNT; i++) createPetal();
+
+        // 📖 Guía desplegable
+        function toggleCollapsible(id) {
+            const content = document.getElementById(id);
+            const header = content.previousElementSibling;
+            const arrowIcon = header.querySelector('#arrowIcon');
+            const headerText = header.querySelector('h3');
+            content.classList.toggle('expanded');
+            arrowIcon.classList.toggle('rotate-180');
+            headerText.textContent = 
+                content.classList.contains('expanded') 
+                ? 'Guía Rápida de Instalación (Cerrar)' 
+                : 'Guía Rápida de Instalación (Abrir)';
+        }
+        window.toggleCollapsible = toggleCollapsible;
+    </script>
+</body>
+</html>
