@@ -1,0 +1,62 @@
+:root {
+  --primary-color: #64B5F6;
+    --accent-color: #FF7043;
+}
+
+.font-elegant {
+  font-family: "Playfair Display", serif;
+}
+
+#petal-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.petal {
+  position: absolute;
+  border-radius: 50% 10%;
+  opacity: 0;
+}
+
+.cta-button {
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}
+
+.collapsible-content.expanded {
+  max-height: 400px;
+  transition: max-height 0.5s ease-in;
+}
+
+/* Animaciones */
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes sway {
+  0% { margin-left: -10px; }
+  100% { margin-left: 10px; }
+}
+
+/* Ajustes responsivos adicionales */
+@media (max-width: 640px) {
+  h1 { font-size: 2rem; }
+  p { font-size: 1rem; }
+  .cta-button { font-size: 1rem; padding: 0.75rem 1.5rem; }
+}
